@@ -10,7 +10,7 @@ import java.util.List;
 
 import co.edu.poli.tiendaOnline.modelo.Producto;
 
-public class ProductoDAO implements DAO<Producto, Integer> {
+public class ProductoDAO implements SpecializedDAO<Producto, Integer> {
     private Connection conn = ConnectionDB.getConnection();
 
     @Override
@@ -86,5 +86,10 @@ public class ProductoDAO implements DAO<Producto, Integer> {
             e.printStackTrace();
             return "Error eliminando el producto";
         }
+    }
+
+    @Override
+    public Producto specializedQuery(String name) {
+        return null;
     }
 }
