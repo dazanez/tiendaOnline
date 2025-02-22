@@ -3,12 +3,12 @@ package co.edu.poli.tiendaOnline.modelo;
 public class Producto {
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", descripcion=" + descripcion + "]";
+		return "Producto [id=" + id + ", descripcion=" + description + "]";
 	}
-	public Producto(int id, String descripcion) {
+	public Producto(int id, String description) {
 		super();
 		this.id = id;
-		this.descripcion = descripcion;
+		this.description = description;
 	}
 	public int getId() {
 		return id;
@@ -16,12 +16,12 @@ public class Producto {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getDescripcion() {
-		return descripcion;
+	public String getDescription() {
+		return description;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	private int id;
-	private String descripcion;
+	private String description;
 }

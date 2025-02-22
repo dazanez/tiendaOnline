@@ -18,7 +18,7 @@ public class ProductoDAO implements SpecializedDAO<Producto, Integer> {
         String sql = "INSERT INTO productos (id, descripcion) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, producto.getId());
-            stmt.setString(2, producto.getDescripcion());
+            stmt.setString(2, producto.getDescription());
             stmt.executeUpdate();
             return "Producto insertado"+producto;
         } catch (SQLException e) {
@@ -65,7 +65,7 @@ public class ProductoDAO implements SpecializedDAO<Producto, Integer> {
     public String actualizar(Producto producto) {
         String sql = "UPDATE productos SET descripcion = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, producto.getDescripcion());
+            stmt.setString(1, producto.getDescription());
             stmt.setInt(2, producto.getId());
             stmt.executeUpdate();
             return "Producto actualizado";
