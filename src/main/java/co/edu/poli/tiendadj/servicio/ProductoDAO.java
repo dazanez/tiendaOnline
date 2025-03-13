@@ -38,7 +38,7 @@ public class ProductoDAO implements SpecializedDAO<Producto, Integer> {
         String sql = "INSERT INTO ProductoAlimenticio (id, aporte_calorico) VALUES (?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, producto.getId());
-            stmt.setFloat(2, producto.getAporteCalorico());
+            stmt.setDouble(2, producto.getAporteCalorico());
             int rows = stmt.executeUpdate();
             return rows > 0 ? "Producto alimenticio insertado" : "Error al insertar producto alimenticio";
         }
@@ -48,7 +48,7 @@ public class ProductoDAO implements SpecializedDAO<Producto, Integer> {
         String sql = "INSERT INTO ProductoElectronico (id, volt_input) VALUES (?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, producto.getId());
-            stmt.setFloat(2, producto.getVoltInput());
+            stmt.setDouble(2, producto.getVoltInput());
             int rows = stmt.executeUpdate();
             return rows > 0 ? "Producto electrónico insertado" : "Error al insertar producto electrónico";
         }
