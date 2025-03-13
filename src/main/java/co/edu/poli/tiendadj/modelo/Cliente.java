@@ -1,13 +1,17 @@
-package co.edu.poli.tiendaOnline.modelo;
+package co.edu.poli.tiendadj.modelo;
 
 public class Cliente {
+	private int id;
+	private String nombre;
+	private String email;
+	private int edad;
+
 	public Cliente(int id, String nombre, String email, int edad) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.email = email;
 		this.edad = edad;
-
 	}
 
 	public int getId() {
@@ -41,11 +45,6 @@ public class Cliente {
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-
-	private int id;
-	private String nombre;
-	private String email;
-	private int edad;
 
 	@Override
 	public String toString() {
