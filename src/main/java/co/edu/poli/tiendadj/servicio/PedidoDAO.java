@@ -6,13 +6,12 @@ import co.edu.poli.tiendadj.modelo.Producto;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
-import java.time.LocalDate;
 
 public class PedidoDAO implements DAO<Pedido, Integer> {
     private Connection connection;
 
-    public PedidoDAO(Connection connection) {
-        this.connection = connection;
+    public PedidoDAO() throws SQLException {
+        this.connection = ConnectionDB.getConnection();
     }
 
     @Override
@@ -73,7 +72,7 @@ public class PedidoDAO implements DAO<Pedido, Integer> {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, pedidoId);
             ResultSet rs = stmt.executeQuery();
-            ProductoDAO productoDAO = new ProductoDAO(connection);
+            ProductoDAO productoDAO = new ProductoDAO();
             while (rs.next()) {
                 productos.add(productoDAO.getById(rs.getInt("producto_id")));
             }

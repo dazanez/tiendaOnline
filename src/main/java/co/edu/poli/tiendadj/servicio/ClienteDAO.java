@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteDAO implements DAO<Cliente, Integer> {
-    private Connection conn;
+    private Connection connection;
 
     public ClienteDAO() throws SQLException {
-        this.conn = ConnectionDB.getConnection();  // Obtener conexión de la base de datos
+        this.connection = ConnectionDB.getConnection();  // Obtener conexión de la base de datos
     }
 
     @Override
     public String insert(Cliente cliente) throws SQLException {
         String sql = "INSERT INTO Cliente (nombre, email, edad) VALUES (?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getEmail());
             stmt.setInt(3, cliente.getEdad());
@@ -32,7 +32,7 @@ public class ClienteDAO implements DAO<Cliente, Integer> {
     @Override
     public Cliente getById(Integer id) throws SQLException {
         String sql = "SELECT * FROM Cliente WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -51,7 +51,7 @@ public class ClienteDAO implements DAO<Cliente, Integer> {
     public List<Cliente> getAll() throws SQLException {
         List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM Cliente";
-        try (PreparedStatement stmt = conn.prepareStatement(sql);
+        try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Cliente cliente = new Cliente(
@@ -69,7 +69,7 @@ public class ClienteDAO implements DAO<Cliente, Integer> {
     @Override
     public String update(Cliente cliente) throws SQLException {
         String sql = "UPDATE Cliente SET nombre = ?, email = ?, edad = ? WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getEmail());
             stmt.setInt(3, cliente.getEdad());
@@ -87,7 +87,7 @@ public class ClienteDAO implements DAO<Cliente, Integer> {
     @Override
     public String delete(Integer id) throws SQLException {
         String sql = "DELETE FROM Cliente WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
 
             int rowsAffected = stmt.executeUpdate();

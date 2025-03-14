@@ -1,8 +1,18 @@
 package co.edu.poli.tiendadj.modelo;
 
-public class Producto {
+public class Producto implements Cloneable {
 	private int id;
 	private String descripcion;
+
+	// Método para clonar
+	@Override
+	public Producto clone() {
+		try {
+			return (Producto) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException("Error al clonar el producto", e);
+		}
+	}
 
 	public int getId() {
 		return id;

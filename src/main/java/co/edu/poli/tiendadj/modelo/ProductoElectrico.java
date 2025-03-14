@@ -1,8 +1,8 @@
 package co.edu.poli.tiendadj.modelo;
 
-public class ProductoElectronico extends Producto {
+public class ProductoElectrico extends Producto {
     private double voltInput;
-    public ProductoElectronico(int id, String descripcion, double voltInput) {
+    public ProductoElectrico(int id, String descripcion, double voltInput) {
         super(id, descripcion);
         this.voltInput = voltInput;
     }

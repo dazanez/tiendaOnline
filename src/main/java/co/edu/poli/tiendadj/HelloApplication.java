@@ -33,6 +33,5 @@ public class HelloApplication extends Application {
             System.out.println("Ocurrió un error al conectar a la BD");
             System.err.println(err.getMessage());
         }
-
     }
 }

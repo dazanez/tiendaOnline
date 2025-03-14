@@ -1,104 +1,97 @@
 package co.edu.poli.tiendadj.servicio;
 
-import co.edu.poli.tiendadj.modelo.Producto;
-import co.edu.poli.tiendadj.modelo.ProductoAlimenticio;
-import co.edu.poli.tiendadj.modelo.ProductoElectronico;
+import co.edu.poli.tiendadj.modelo.*;
 
 import java.sql.*;
 import java.util.*;
 
-public class ProductoDAO implements SpecializedDAO<Producto, Integer> {
+public class ProductoDAO implements DAO<Producto, Integer> {
     private Connection connection;
 
-    public ProductoDAO(Connection connection) {
-        this.connection = connection;
+    public ProductoDAO() throws SQLException {
+        this.connection = ConnectionDB.getConnection();
     }
 
     @Override
     public String insert(Producto producto) throws SQLException {
-        String sql = "INSERT INTO Producto (descripcion) VALUES (?) RETURNING id";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, producto.getDescripcion());
-            ResultSet rs = stmt.executeQuery();
+        String sqlProducto = "INSERT INTO Producto (descripcion) VALUES (?) RETURNING id";
+        try (PreparedStatement stmtProducto = connection.prepareStatement(sqlProducto, Statement.RETURN_GENERATED_KEYS)) {
+            stmtProducto.setString(1, producto.getDescripcion());
+            stmtProducto.executeUpdate();
+            ResultSet rs = stmtProducto.getGeneratedKeys();
+
             if (rs.next()) {
-                int id = rs.getInt(1);
-                producto.setId(id);
+                int productoId = rs.getInt(1);
+                producto.setId(productoId);
+
                 if (producto instanceof ProductoAlimenticio) {
-                    return insertProductoAlimenticio((ProductoAlimenticio) producto);
-                } else if (producto instanceof ProductoElectronico) {
-                    return insertProductoElectronico((ProductoElectronico) producto);
+                    String sqlAlimenticio = "INSERT INTO ProductoAlimenticio (id, aporte_calorico) VALUES (?, ?)";
+                    try (PreparedStatement stmtAlimenticio = connection.prepareStatement(sqlAlimenticio)) {
+                        stmtAlimenticio.setInt(1, productoId);
+                        stmtAlimenticio.setDouble(2, ((ProductoAlimenticio) producto).getAporteCalorico());
+                        stmtAlimenticio.executeUpdate();
+                    }
+                } else if (producto instanceof ProductoElectrico) {
+                    String sqlElectronico = "INSERT INTO ProductoElectronico (id, volt_input) VALUES (?, ?)";
+                    try (PreparedStatement stmtElectronico = connection.prepareStatement(sqlElectronico)) {
+                        stmtElectronico.setInt(1, productoId);
+                        stmtElectronico.setDouble(2, ((ProductoElectrico) producto).getVoltInput());
+                        stmtElectronico.executeUpdate();
+                    }
                 }
-                return "Producto insertado con ID: " + id;
+                return "Producto insertado con éxito con ID: " + productoId;
             }
-            return "Error al insertar producto";
         }
-    }
-
-    private String insertProductoAlimenticio(ProductoAlimenticio producto) throws SQLException {
-        String sql = "INSERT INTO ProductoAlimenticio (id, aporte_calorico) VALUES (?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, producto.getId());
-            stmt.setDouble(2, producto.getAporteCalorico());
-            int rows = stmt.executeUpdate();
-            return rows > 0 ? "Producto alimenticio insertado" : "Error al insertar producto alimenticio";
-        }
-    }
-
-    private String insertProductoElectronico(ProductoElectronico producto) throws SQLException {
-        String sql = "INSERT INTO ProductoElectronico (id, volt_input) VALUES (?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, producto.getId());
-            stmt.setDouble(2, producto.getVoltInput());
-            int rows = stmt.executeUpdate();
-            return rows > 0 ? "Producto electrónico insertado" : "Error al insertar producto electrónico";
-        }
+        return "Error al insertar producto";
     }
 
     @Override
     public Producto getById(Integer id) throws SQLException {
-        String sql = "SELECT * FROM Producto WHERE id = ?";
+        String sql = "SELECT p.id, p.descripcion, pa.aporte_calorico, pe.volt_input " +
+                "FROM Producto p " +
+                "LEFT JOIN ProductoAlimenticio pa ON p.id = pa.id " +
+                "LEFT JOIN ProductoElectronico pe ON p.id = pe.id " +
+                "WHERE p.id = ?";
+
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
+
             if (rs.next()) {
                 String descripcion = rs.getString("descripcion");
-                return getSpecificProduct(id, descripcion);
+                Double aporteCalorico = (Double) rs.getObject("aporte_calorico");
+                Double voltInput = (Double) rs.getObject("volt_input");
+
+                if (aporteCalorico != null) {
+                    return new ProductoAlimenticioFactory().crearProducto(id, descripcion, aporteCalorico);
+                } else if (voltInput != null) {
+                    return new ProductoElectricoFactory().crearProducto(id, descripcion, voltInput);
+                }
             }
         }
         return null;
     }
 
-    private Producto getSpecificProduct(int id, String descripcion) throws SQLException {
-        String sqlAlim = "SELECT aporte_calorico FROM ProductoAlimenticio WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sqlAlim)) {
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return new ProductoAlimenticio(id, descripcion, rs.getFloat("aporte_calorico"));
-            }
-        }
-
-        String sqlElec = "SELECT volt_input FROM ProductoElectronico WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sqlElec)) {
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return new ProductoElectronico(id, descripcion, rs.getFloat("volt_input"));
-            }
-        }
-
-        return new Producto(id, descripcion);
-    }
-
     @Override
     public List<Producto> getAll() throws SQLException {
         List<Producto> productos = new ArrayList<>();
-        String sql = "SELECT id, descripcion FROM Producto";
+        String sql = "SELECT p.id, p.descripcion, pa.aporte_calorico, pe.volt_input " +
+                "FROM Producto p " +
+                "LEFT JOIN ProductoAlimenticio pa ON p.id = pa.id " +
+                "LEFT JOIN ProductoElectronico pe ON p.id = pe.id";
+
         try (PreparedStatement stmt = connection.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String descripcion = rs.getString("descripcion");
-                productos.add(getSpecificProduct(id, descripcion));
+                Double aporteCalorico = (Double) rs.getObject("aporte_calorico");
+                Double voltInput = (Double) rs.getObject("volt_input");
+
+                if (aporteCalorico != null) {
+                    productos.add(new ProductoAlimenticioFactory().crearProducto(id, descripcion, aporteCalorico));
+                } else if (voltInput != null) {
+                    productos.add(new ProductoElectricoFactory().crearProducto(id, descripcion, voltInput));
+                }
             }
         }
         return productos;
@@ -106,11 +99,27 @@ public class ProductoDAO implements SpecializedDAO<Producto, Integer> {
 
     @Override
     public String update(Producto producto) throws SQLException {
-        String sql = "UPDATE Producto SET descripcion = ? WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, producto.getDescripcion());
-            stmt.setInt(2, producto.getId());
-            int rowsAffected = stmt.executeUpdate();
+        String sqlProducto = "UPDATE Producto SET descripcion = ? WHERE id = ?";
+        try (PreparedStatement stmtProducto = connection.prepareStatement(sqlProducto)) {
+            stmtProducto.setString(1, producto.getDescripcion());
+            stmtProducto.setInt(2, producto.getId());
+            int rowsAffected = stmtProducto.executeUpdate();
+
+            if (producto instanceof ProductoAlimenticio) {
+                String sqlAlimenticio = "UPDATE ProductoAlimenticio SET aporte_calorico = ? WHERE id = ?";
+                try (PreparedStatement stmtAlimenticio = connection.prepareStatement(sqlAlimenticio)) {
+                    stmtAlimenticio.setDouble(1, ((ProductoAlimenticio) producto).getAporteCalorico());
+                    stmtAlimenticio.setInt(2, producto.getId());
+                    stmtAlimenticio.executeUpdate();
+                }
+            } else if (producto instanceof ProductoElectrico) {
+                String sqlElectronico = "UPDATE ProductoElectronico SET volt_input = ? WHERE id = ?";
+                try (PreparedStatement stmtElectronico = connection.prepareStatement(sqlElectronico)) {
+                    stmtElectronico.setDouble(1, ((ProductoElectrico) producto).getVoltInput());
+                    stmtElectronico.setInt(2, producto.getId());
+                    stmtElectronico.executeUpdate();
+                }
+            }
             return rowsAffected > 0 ? "Producto actualizado con éxito" : "Error al actualizar producto";
         }
     }
@@ -124,21 +133,4 @@ public class ProductoDAO implements SpecializedDAO<Producto, Integer> {
             return rowsAffected > 0 ? "Producto eliminado con éxito" : "Error al eliminar producto";
         }
     }
-
-    @Override
-    public List<Producto> specializedQuery(String description) {
-        List<Producto> productos = new ArrayList<>();
-        String sql = "SELECT * FROM Producto WHERE descripcion ILIKE ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, "%" + description + "%");  // Búsqueda parcial e insensible a mayúsculas/minúsculas
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                productos.add(new Producto(rs.getInt("id"), rs.getString("descripcion")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return productos;
-    }
-
 }
