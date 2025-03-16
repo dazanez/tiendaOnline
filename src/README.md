@@ -1,3 +1,5 @@
+- Borrar el id como parametro de constructores cuando el objeto tiene autoid en la DB
+
 ```roomsql
 -- Crear la tabla Cliente
 CREATE TABLE Cliente (

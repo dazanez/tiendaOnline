@@ -5,7 +5,7 @@ import co.edu.poli.tiendadj.modelo.*;
 import java.sql.*;
 import java.util.*;
 
-public class ProductoDAO implements DAO<Producto, Integer> {
+public class ProductoDAO implements SpecializedDAO<Producto, Integer> {
     private Connection connection;
 
     public ProductoDAO() throws SQLException {
@@ -132,5 +132,10 @@ public class ProductoDAO implements DAO<Producto, Integer> {
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0 ? "Producto eliminado con éxito" : "Error al eliminar producto";
         }
+    }
+
+    @Override
+    public List<Producto> specializedQuery(String name) {
+        return null;
     }
 }

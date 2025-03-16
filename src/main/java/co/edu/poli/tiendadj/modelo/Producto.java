@@ -1,28 +1,27 @@
 package co.edu.poli.tiendadj.modelo;
 
-public class Producto implements Cloneable {
+// Clase abstracta Producto
+public abstract class Producto implements ProductoPrototype {
 	private int id;
 	private String descripcion;
 
-	// Método para clonar
-	@Override
-	public Producto clone() {
-		try {
-			return (Producto) super.clone();
-		} catch (CloneNotSupportedException e) {
-			throw new RuntimeException("Error al clonar el producto", e);
-		}
+	public Producto(int id, String descripcion) {
+		this.id = id;
+		this.descripcion = descripcion;
 	}
 
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
@@ -31,9 +30,8 @@ public class Producto implements Cloneable {
 	public String toString() {
 		return "Producto [id=" + id + ", descripcion=" + descripcion + "]";
 	}
-	public Producto(int id, String description) {
-		super();
-		this.id = id;
-		this.descripcion = description;
-	}
+
+	// Método abstracto para forzar la implementación en las subclases
+	@Override
+	public abstract Producto clonar();
 }

@@ -16,9 +16,9 @@
       <Button fx:id="getClienteById" layoutX="344.0" layoutY="223.0" mnemonicParsing="false" onAction="#getClienteById" text="Consultar Cliente" />
       <Button fx:id="updateCliente" layoutX="335.0" layoutY="101.0" mnemonicParsing="false" onAction="#updateCliente" text="Actualizar Cliente" />
       <Button fx:id="deleteClienteById" layoutX="350.0" layoutY="288.0" mnemonicParsing="false" onAction="#deleteClienteById" text="Eliminar Cliente" />
-      <Button layoutX="31.0" layoutY="411.0" mnemonicParsing="false" onAction="#openMenu" prefHeight="30.0" prefWidth="69.0" text="Menu" textAlignment="CENTER">
+      <Button layoutX="14.0" layoutY="429.0" mnemonicParsing="false" onAction="#openMenu" prefHeight="30.0" prefWidth="69.0" text="Menu" textAlignment="CENTER">
          <font>
-            <Font name="System Bold Italic" size="15.0" />
+            <Font size="14.0" />
          </font>
       </Button>
    </children>

@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 
-public class ClienteControlador implements ControllerTemp<Cliente> {
+public class ClienteControlador extends ControladorBase implements ControllerTemp<Cliente> {
 	int id = 0;
 
 	public String create(Cliente cliente) {
