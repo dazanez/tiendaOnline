@@ -10,5 +10,9 @@ module co.edu.poli.tiendadj {
     requires java.sql;
 
     opens co.edu.poli.tiendadj to javafx.fxml;
+    opens co.edu.poli.tiendadj.controlador to javafx.fxml;
+    opens co.edu.poli.tiendadj.vista to javafx.fxml;
+    exports co.edu.poli.tiendadj.controlador;
+    exports co.edu.poli.tiendadj.vista;
     exports co.edu.poli.tiendadj;
 }
