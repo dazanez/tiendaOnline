@@ -1,6 +1,8 @@
 package co.edu.poli.tiendadj.vista;
 
+import co.edu.poli.tiendadj.modelo.Proveedor;
 import co.edu.poli.tiendadj.servicio.ConnectionDB;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -50,5 +52,13 @@ public class Main {
 //        ConnectionDB.getConnection();
 //        // Cerrar la conexión al final del programa
 //        ConnectionDB.closeConnection();
+    	
+    	Proveedor proveedor = new Proveedor.Builder()
+    			.setEvaluacion("Excelente")
+    			.setCertificacion("ISO 1010")
+    			.setPoliticaEntrega("Entrega 24 hr")
+    			.build();
+    	
+    			System.out.println(proveedor);
     }
 }
