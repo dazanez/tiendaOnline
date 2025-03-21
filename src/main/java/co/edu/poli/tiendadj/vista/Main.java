@@ -1,7 +1,10 @@
 package co.edu.poli.tiendadj.vista;
 
+import co.edu.poli.tiendadj.modelo.Certificacion;
+import co.edu.poli.tiendadj.modelo.Evaluacion;
+import co.edu.poli.tiendadj.modelo.PoliticaEntrega;
 import co.edu.poli.tiendadj.modelo.Proveedor;
-import co.edu.poli.tiendadj.servicio.ConnectionDB;
+
 
 
 public class Main {
@@ -53,12 +56,18 @@ public class Main {
 //        // Cerrar la conexión al final del programa
 //        ConnectionDB.closeConnection();
     	
-    	Proveedor proveedor = new Proveedor.Builder()
-    			.setEvaluacion("Excelente")
-    			.setCertificacion("ISO 1010")
-    			.setPoliticaEntrega("Entrega 24 hr")
-    			.build();
     	
-    			System.out.println(proveedor);
+    			
+    	Evaluacion evaluacion = new Evaluacion("Alta");
+        Certificacion certificacion = new Certificacion("ISO 9001");
+        PoliticaEntrega politicaEntrega = new PoliticaEntrega("Entrega en 24 horas");
+
+        Proveedor proveedor = new Proveedor.Builder()
+                .setEvaluacion(evaluacion)
+                .setCertificacion(certificacion)
+                .setPoliticaEntrega(politicaEntrega)
+                .build();
+
+        System.out.println(proveedor);
     }
 }

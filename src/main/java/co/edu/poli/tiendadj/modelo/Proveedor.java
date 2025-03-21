@@ -1,43 +1,47 @@
 package co.edu.poli.tiendadj.modelo;
 
 public class Proveedor {
-	private final String evaluacion;
-	private final String certificacion;
-	private final String politicaEntrega;
+    private final Evaluacion evaluacion;
+    private final Certificacion certificacion;
+    private final PoliticaEntrega politicaEntrega;
 
-	private Proveedor(Builder builder) {
-		this.evaluacion = builder.evaluacion;
-		this.certificacion = builder.certificacion;
-		this.politicaEntrega = builder.politicaEntrega;
-	}
+    private Proveedor(Builder builder) {
+        this.evaluacion = builder.evaluacion;
+        this.certificacion = builder.certificacion;
+        this.politicaEntrega = builder.politicaEntrega;
+    }
 
-	public static class Builder {
-		private String evaluacion;
-		private String certificacion;
-		private String politicaEntrega;
+    public static class Builder {
+        private Evaluacion evaluacion;
+        private Certificacion certificacion;
+        private PoliticaEntrega politicaEntrega;
 
-		public Builder setEvaluacion(String evaluacion) {
-			this.evaluacion = evaluacion;
-			return this;
-		}
+        public Builder setEvaluacion(Evaluacion evaluacion) {
+            this.evaluacion = evaluacion;
+            return this;
+        }
 
-		public Builder setCertificacion(String certificación) {
-			this.certificacion = certificación;
-			return this;
-		}
+        public Builder setCertificacion(Certificacion certificacion) {
+            this.certificacion = certificacion;
+            return this;
+        }
 
-		public Builder setPoliticaEntrega(String politicaEntrega) {
-			this.politicaEntrega = politicaEntrega;
-			return this;
-		}
+        public Builder setPoliticaEntrega(PoliticaEntrega politicaEntrega) {
+            this.politicaEntrega = politicaEntrega;
+            return this;
+        }
 
-		public Proveedor build() {
-			return new Proveedor(this);
-		}
-	}
-	@Override
-	public String toString() {
-		return "Builder [evaluacion=" + evaluacion + ", certificacion=" + certificacion + ", politaEntrega="
-				+ politicaEntrega + "]";
-	}
+        public Proveedor build() {
+            return new Proveedor(this);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Proveedor{" +
+                "evaluacion=" + evaluacion +
+                ", certificacion=" + certificacion +
+                ", politicaEntrega=" + politicaEntrega +
+                '}';
+    }
 }
