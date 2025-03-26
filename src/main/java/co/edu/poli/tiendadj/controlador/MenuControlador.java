@@ -19,4 +19,8 @@ public class MenuControlador extends ControladorBase {
     void openClonarProductoScreen(ActionEvent event) throws IOException {
         MainView.loadScreenWithPath("productoClonar.fxml", "Clonar Producto");
     }
+    @FXML
+    void openBuilderScreen(ActionEvent event) throws IOException{
+    	MainView.loadScreenWithPath("proveedor.fxml", "Proveedor");
+    }
 }

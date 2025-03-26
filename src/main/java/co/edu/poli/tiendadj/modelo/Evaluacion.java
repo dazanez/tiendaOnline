@@ -13,6 +13,6 @@ public class Evaluacion {
 
     @Override
     public String toString() {
-        return "Evaluacion{" + "nivel='" + nivel + '\'' + '}';
+        return nivel;
     }
 }

@@ -13,6 +13,6 @@ public class PoliticaEntrega {
 
 	@Override
 	public String toString() {
-		return "PoliticaEntrega{" + "politica='" + politica + '\'' + '}';
+		return politica;
 	}
 }

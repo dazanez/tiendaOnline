@@ -38,10 +38,10 @@ public class Proveedor {
 
     @Override
     public String toString() {
-        return "Proveedor{" +
-                "evaluacion=" + evaluacion +
-                ", certificacion=" + certificacion +
-                ", politicaEntrega=" + politicaEntrega +
-                '}';
+        return "Proveedor:\n" +
+               "- Evaluación: " + (evaluacion != null ? evaluacion.getNivel() : "No asignada") + "\n" +
+               "- Certificación: " + (certificacion != null ? certificacion.getTipo() : "No asignada") + "\n" +
+               "- Política de Entrega: " + (politicaEntrega != null ? politicaEntrega.getPolitica() : "No asignada");
     }
+
 }

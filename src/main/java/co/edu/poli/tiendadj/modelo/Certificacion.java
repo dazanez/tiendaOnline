@@ -13,6 +13,6 @@ public class Certificacion {
 
     @Override
     public String toString() {
-        return "Certificacion{" + "tipo='" + tipo + '\'' + '}';
+        return tipo;
     }
 }
