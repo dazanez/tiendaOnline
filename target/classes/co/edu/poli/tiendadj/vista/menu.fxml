@@ -15,5 +15,6 @@
          </font>
       </Text>
       <Button layoutX="58.0" layoutY="216.0" mnemonicParsing="false" onAction="#openBuilderScreen" prefHeight="42.0" prefWidth="96.0" text="Builder" />
+      <Button layoutX="439.0" layoutY="216.0" mnemonicParsing="false" onAction="#openCompositeScreen" prefHeight="42.0" prefWidth="96.0" text="Composite" />
    </children>
 </AnchorPane>
