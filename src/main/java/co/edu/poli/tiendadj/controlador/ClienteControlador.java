@@ -10,17 +10,9 @@ import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 
-public class ClienteControlador extends ControladorBase implements ControllerTemp<Cliente> {
+public class ClienteControlador extends ControladorBase {
 	int id = 0;
 
-	public String create(Cliente cliente) {
-		try {
-			ClienteDAO clienteDAO = new ClienteDAO();
-			return clienteDAO.insert(cliente);
-		} catch (SQLException e) {
-			return "Error al insertar cliente: " + e.getMessage();
-		}
-	}
 	@FXML
 	private Button updateCliente;
 
