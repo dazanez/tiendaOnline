@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.tiendadj.controlador.MenuControlador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.tiendadj.controlador.MenuControlador">
    <children>
-      <Button layoutX="234.0" layoutY="113.0" mnemonicParsing="false" onAction="#openClienteCrudScreen" text="CRUD Cliente" />
-      <Button layoutX="223.0" layoutY="181.0" mnemonicParsing="false" onAction="#openClonarProductoScreen" text="Clonar producto" />
-      <Text layoutX="254.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu">
+      <Button layoutX="234.0" layoutY="86.0" mnemonicParsing="false" onAction="#openClienteCrudScreen" prefHeight="48.0" prefWidth="117.0" text="CRUD Cliente" />
+      <Button layoutX="234.0" layoutY="150.0" mnemonicParsing="false" onAction="#openClonarProductoScreen" prefHeight="35.0" prefWidth="117.0" text="Clonar producto" />
+      <Text layoutX="245.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" wrappingWidth="95.8984375">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
+      <Button layoutX="58.0" layoutY="216.0" mnemonicParsing="false" onAction="#openBuilderScreen" prefHeight="42.0" prefWidth="96.0" text="Builder" />
+      <Button layoutX="439.0" layoutY="216.0" mnemonicParsing="false" onAction="#openCompositeScreen" prefHeight="42.0" prefWidth="96.0" text="Composite" />
    </children>
 </AnchorPane>

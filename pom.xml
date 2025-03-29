@@ -79,6 +79,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+        	<groupId>co.edu.poli</groupId>
+        	<artifactId>AndresGuzman</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

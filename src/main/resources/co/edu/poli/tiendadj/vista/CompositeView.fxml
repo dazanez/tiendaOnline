@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.tiendadj.controlador.CompositeController">
+
+    <children>
+        <TreeView fx:id="treeView" layoutX="20.0" layoutY="20.0" prefHeight="300.0" prefWidth="250.0" />
+        <Button layoutX="300.0" layoutY="50.0" onAction="#agregarDepartamento" text="➕ Agregar Departamento" />
+        <Button layoutX="300.0" layoutY="100.0" onAction="#agregarEmpleado" text="👤 Agregar Empleado" />
+      <Button layoutX="366.0" layoutY="264.0" mnemonicParsing="false" onAction="#openMenuScreen1" text="Menu" />
+    </children>
+</AnchorPane>
