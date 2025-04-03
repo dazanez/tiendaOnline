@@ -27,4 +27,8 @@ public class MenuControlador extends ControladorBase {
     void openCompositeScreen(ActionEvent event) throws IOException{
     	MainView.loadScreenWithPath("CompositeView.fxml", "Departamentos e Integrantes");
     }
+    @FXML
+    void openBridgeScreen(ActionEvent event) throws IOException{
+    	MainView.loadScreenWithPath("envio.fxml", "Bridge envios");
+    }
 }
