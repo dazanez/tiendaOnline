@@ -1,4 +1,4 @@
-package co.edu.poli.tiendadj.modelo.external;
+package co.edu.poli.tiendadj.modelo;
 
 public class PaypalAPI {
     public boolean makePayment(String email, double amount) {

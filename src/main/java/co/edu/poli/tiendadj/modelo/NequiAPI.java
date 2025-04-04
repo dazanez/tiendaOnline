@@ -1,4 +1,4 @@
-package co.edu.poli.tiendadj.modelo.external;
+package co.edu.poli.tiendadj.modelo;
 
 public class NequiAPI {
     public boolean realizarPago(String celular, double monto) {

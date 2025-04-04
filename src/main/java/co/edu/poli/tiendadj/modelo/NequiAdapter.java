@@ -1,7 +1,4 @@
-package co.edu.poli.tiendadj.modelo.adapters;
-
-import co.edu.poli.tiendadj.modelo.external.NequiAPI;
-import co.edu.poli.tiendadj.modelo.interfaces.ProcesadorPago;
+package co.edu.poli.tiendadj.modelo;
 
 public class NequiAdapter implements ProcesadorPago {
     private NequiAPI nequiAPI;
