@@ -40,9 +40,4 @@ public class ProveedorController extends ControladorBase {
 
 		resultadoArea.setText(proveedor.toString());
 	}
-
-	@FXML
-	void openMenuScreen(ActionEvent event) throws IOException {
-		MainView.loadScreenWithPath("menu.fxml", "Menu");
-	}
 }

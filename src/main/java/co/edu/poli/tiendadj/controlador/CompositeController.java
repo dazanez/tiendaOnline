@@ -10,7 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class CompositeController extends ControladorBase {
-    @FXML private TreeView<String> treeView;
+    @FXML
+    private TreeView<String> treeView;
 
     private TreeItem<String> raiz;
     private Departamento empresa;
@@ -56,16 +57,11 @@ public class CompositeController extends ControladorBase {
             String[] partes = datos.split("-");
             if (partes.length == 2) {
                 Empleado nuevoEmp = new Empleado(partes[0].trim(), partes[1].trim());
-                
+
                 // Agregar empleado dentro del departamento seleccionado
                 TreeItem<String> nuevoItem = new TreeItem<>("" + nuevoEmp.getNombre());
                 departamentoSeleccionado.getChildren().add(nuevoItem);
             }
         });
     }
-    @FXML
-	void openMenuScreen1(ActionEvent event) throws IOException {
-		MainView.loadScreenWithPath("menu.fxml", "Menu");
-	}
-
 }

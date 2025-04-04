@@ -1,7 +1,4 @@
-package co.edu.poli.tiendadj.modelo.adapters;
-
-import co.edu.poli.tiendadj.modelo.external.PaypalAPI;
-import co.edu.poli.tiendadj.modelo.interfaces.ProcesadorPago;
+package co.edu.poli.tiendadj.modelo;
 
 public class PaypalAdapter implements ProcesadorPago {
     private PaypalAPI paypalAPI;

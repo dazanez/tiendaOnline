@@ -1,9 +1,8 @@
 package co.edu.poli.tiendadj.controlador;
 
-import co.edu.poli.tiendadj.modelo.Producto;
-import co.edu.poli.tiendadj.modelo.adapters.NequiAdapter;
-import co.edu.poli.tiendadj.modelo.adapters.PaypalAdapter;
-import co.edu.poli.tiendadj.modelo.interfaces.ProcesadorPago;
+import co.edu.poli.tiendadj.modelo.NequiAdapter;
+import co.edu.poli.tiendadj.modelo.PaypalAdapter;
+import co.edu.poli.tiendadj.modelo.ProcesadorPago;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

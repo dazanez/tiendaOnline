@@ -25,6 +25,11 @@ public class MenuControlador extends ControladorBase {
     }
     @FXML
     void openCompositeScreen(ActionEvent event) throws IOException{
-    	MainView.loadScreenWithPath("CompositeView.fxml", "Departamentos e Integrantes");
+    	MainView.loadScreenWithPath("composite.fxml", "Departamentos e Integrantes");
+    }
+
+    @FXML
+    void openAdapterScreen(ActionEvent event) throws IOException{
+    	MainView.loadScreenWithPath("pago.fxml", "Departamentos e Integrantes");
     }
 }

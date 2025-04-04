@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ProductoControlador extends ControladorBase implements SpecializedController<Producto> {
+public class ProductoControlador extends ControladorBase {
 
 	private SpecializedDAO<Producto, Integer> productoDAO;
 	private ProductoElectrico productoElectrico;
@@ -39,16 +39,6 @@ public class ProductoControlador extends ControladorBase implements SpecializedC
 			return productoDAO.insert(producto);
 		} catch (Exception e) {
 			return "❌ Error al crear el producto: " + e.getMessage();
-		}
-	}
-
-	@Override
-	public List<Producto> specialiezedQuery(String name) {
-		try {
-			return productoDAO.specializedQuery(name);
-		} catch (Exception e) {
-			System.out.println("❌ Error en la consulta especializada: " + e.getMessage());
-			return null;
 		}
 	}
 
