@@ -36,4 +36,8 @@ public class MenuControlador extends ControladorBase {
     void openBridgeScreen(ActionEvent event) throws IOException{
     	MainView.loadScreenWithPath("envio.fxml", "Bridge envios");
     }
+    @FXML
+    void openDecoratorScreen(ActionEvent event) throws IOException{
+    	MainView.loadScreenWithPath("carrito.fxml", "Carrito de compras");
+    }
 }
