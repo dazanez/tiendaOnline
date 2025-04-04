@@ -19,7 +19,7 @@ public class MainView extends Application {
     public void start(Stage stage) throws IOException {
         appStage = stage;
 
-        loadScreenWithPath("pago.fxml", "Menu");
+        loadScreenWithPath("menu.fxml", "Menu");
     }
 
     public static void main(String[] args) {
