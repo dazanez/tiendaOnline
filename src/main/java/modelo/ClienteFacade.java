@@ -5,21 +5,13 @@ public class ClienteFacade {
     private HistorialPedidosManager historial;
     private FormasPagoManager pago;
 
-    public ClienteFacade() {
-        info = new InformacionPersonalManager();
-        historial = new HistorialPedidosManager();
-        pago = new FormasPagoManager();
+    public ClienteFacade(InformacionPersonalManager info, HistorialPedidosManager historial, FormasPagoManager pago) {
+        this.info = info;
+        this.historial = historial;
+        this.pago = pago;
     }
 
-    public String mostrarInformacion() {
-        return info.mostrar();
-    }
-
-    public String mostrarHistorialPedidos() {
-        return historial.mostrar();
-    }
-
-    public String mostrarFormasPago() {
-        return pago.mostrar();
+    public String mostrarTodo() {
+        return info.mostrar() + "\n" + historial.mostrar() + "\n" + pago.mostrar();
     }
 }
