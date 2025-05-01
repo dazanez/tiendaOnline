@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.tiendadj.controlador.ProductoControlador">
+   <children>
+      <Text layoutX="34.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
+      <TextField fx:id="nameTxt" layoutX="34.0" layoutY="129.0" prefHeight="39.0" prefWidth="187.0" />
+      <Text layoutX="34.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio" />
+      <TextField fx:id="priceTxt" layoutX="34.0" layoutY="206.0" prefHeight="39.0" prefWidth="187.0" />
+      <Text layoutX="34.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" />
+      <TextArea fx:id="descriptionTxt" layoutX="34.0" layoutY="288.0" prefHeight="73.0" prefWidth="187.0" />
+      <TextField fx:id="stockTxt" layoutX="251.0" layoutY="129.0" prefHeight="39.0" prefWidth="187.0" />
+      <Text layoutX="251.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock" />
+      <DatePicker fx:id="datePicker" layoutX="251.0" layoutY="206.0" />
+      <Text layoutX="251.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha" />
+      <Button fx:id="updateBttn" layoutX="331.0" layoutY="265.0" mnemonicParsing="false" onAction="#onUpdate" text="Actualizar" />
+      <Text layoutX="37.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modo">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Button fx:id="editBttn" layoutX="151.0" layoutY="38.0" mnemonicParsing="false" onAction="#onEdit" text="Editar" />
+      <Button fx:id="showHistoryBttn" layoutX="223.0" layoutY="38.0" mnemonicParsing="false" onAction="#OnShowHistory" text="Consultar historial" />
+      <Separator layoutX="34.0" layoutY="72.0" prefHeight="10.0" prefWidth="544.0" />
+      <Button layoutX="6.0" layoutY="5.0" mnemonicParsing="false" onAction="#openMenu" prefHeight="24.0" prefWidth="66.0" text="←Menu" textFill="#434343">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

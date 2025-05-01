@@ -1,37 +1,63 @@
 package co.edu.poli.tiendadj.modelo;
 
+import java.time.LocalDate;
+
 // Clase abstracta Producto
-public abstract class Producto implements ProductoPrototype {
-	private int id;
-	private String descripcion;
+public class Producto {
+	private String name, description;
+	private double price;
+	private int stock;
+	private LocalDate createdAt;
 
-	public Producto(int id, String descripcion) {
-		this.id = id;
-		this.descripcion = descripcion;
+	public Producto(String name, String description, double price, int stock) {
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.stock = stock;
+		this.createdAt = LocalDate.now();
 	}
 
-	public int getId() {
-		return id;
+	public ProductoMemento createSnapshot() {
+		return new ProductoMemento(this, name, description, price, stock, createdAt);
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public String getName() {
+		return name;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public String getDescription() {
+		return description;
 	}
 
-	@Override
-	public String toString() {
-		return "Producto [id=" + id + ", descripcion=" + descripcion + "]";
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	// Método abstracto para forzar la implementación en las subclases
-	@Override
-	public abstract Producto clonar();
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+	public LocalDate getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDate createdAt) {
+		this.createdAt = createdAt;
+	}
 }

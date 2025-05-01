@@ -11,33 +11,12 @@ public class MenuControlador extends ControladorBase {
     private MainView mainView = new MainView();
 
     @FXML
-    void openClienteCrudScreen(ActionEvent event) throws IOException {
-        MainView.loadScreenWithPath("clienteCRUD.fxml", "CRUD Cliente");
+    void openProductoScreen(ActionEvent event) throws IOException {
+        MainView.loadScreenWithPath("producto.fxml", "Producto Memento");
     }
 
     @FXML
-    void openClonarProductoScreen(ActionEvent event) throws IOException {
-        MainView.loadScreenWithPath("productoClonar.fxml", "Clonar Producto");
-    }
-    @FXML
-    void openBuilderScreen(ActionEvent event) throws IOException{
-    	MainView.loadScreenWithPath("proveedor.fxml", "Proveedor");
-    }
-    @FXML
-    void openCompositeScreen(ActionEvent event) throws IOException{
-    	MainView.loadScreenWithPath("composite.fxml", "Departamentos e Integrantes");
-    }
-
-    @FXML
-    void openAdapterScreen(ActionEvent event) throws IOException{
-    	MainView.loadScreenWithPath("pago.fxml", "Departamentos e Integrantes");
-    }
-    @FXML
-    void openBridgeScreen(ActionEvent event) throws IOException{
-    	MainView.loadScreenWithPath("envio.fxml", "Bridge envios");
-    }
-    @FXML
-    void openDecoratorScreen(ActionEvent event) throws IOException{
-    	MainView.loadScreenWithPath("carrito.fxml", "Carrito de compras");
+    void openObserverScreen(ActionEvent event) throws IOException {
+//        MainView.loadScreenWithPath("observer.fxml", "Observer");
     }
 }

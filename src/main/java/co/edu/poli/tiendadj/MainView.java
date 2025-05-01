@@ -5,6 +5,7 @@ import co.edu.poli.tiendadj.servicio.ConnectionDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -34,17 +35,25 @@ public class MainView extends Application {
         stage.show();
     }
 
-    public static void loadScreenWithPath(String path, String title) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getResourceFor(path));
-        AnchorPane root = loader.load();
-        Scene scene = new Scene(root);
-        appStage.setTitle(title);
-        appStage.setScene(scene);
-        appStage.show();
+    public static void loadScreenWithPath(String path, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getResourceFor(path));
+            AnchorPane root = loader.load();
+            Scene scene = new Scene(root);
+            appStage.setTitle(title);
+            appStage.setScene(scene);
+            appStage.show();
 
-        // Pasa el Stage al controlador
-        ControladorBase controlador = loader.getController();
-        controlador.setStage(appStage);
+            // Pasa el Stage al controlador
+            ControladorBase controlador = loader.getController();
+            controlador.setStage(appStage);
+        }
+        catch (IOException err) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(err.getMessage());
+            alert.show();
+            err.printStackTrace();
+        }
     }
 
     private static URL getResourceFor(String filename) {

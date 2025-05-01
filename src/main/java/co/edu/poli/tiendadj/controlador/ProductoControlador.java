@@ -1,90 +1,98 @@
 package co.edu.poli.tiendadj.controlador;
-
 import co.edu.poli.tiendadj.modelo.Producto;
-import co.edu.poli.tiendadj.modelo.ProductoAlimenticio;
-import co.edu.poli.tiendadj.modelo.ProductoElectrico;
-import co.edu.poli.tiendadj.servicio.ProductoDAO;
-import co.edu.poli.tiendadj.servicio.SpecializedDAO;
+import co.edu.poli.tiendadj.modelo.ProductoMemento;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoControlador extends ControladorBase {
 
-	private SpecializedDAO<Producto, Integer> productoDAO;
-	private ProductoElectrico productoElectrico;
-	private ProductoAlimenticio productoAlimenticio;
+    private Producto producto;
+    List<ProductoMemento> productosHistory = new ArrayList<>();
+    boolean isEditing;
 
+    @FXML
+    private void initialize() {
+        isEditing = true;
+        producto = new Producto("Chocorramo", "Ponque con choco", 3000, 10);
 
-	public ProductoControlador() throws SQLException {
-		try {
-			productoDAO = (SpecializedDAO) new ProductoDAO();
-			productoElectrico = new ProductoElectrico(123, "Nevera", 120);
-			productoDAO.insert(productoElectrico);
-			productoAlimenticio = new ProductoAlimenticio(345, "Chocorramo", 120);
-			productoDAO.insert(productoAlimenticio);
-		} catch (SQLException err) {
-			System.err.println("Error al crear el DAO de Producto: " + err.getMessage());
+        nameTxt.setText(producto.getName());
+        descriptionTxt.setText(producto.getDescription());
+        priceTxt.setText(producto.getPrice() + "");
+        stockTxt.setText(producto.getStock() + "");
+        datePicker.setValue(producto.getCreatedAt());
 
-		}
-	}
+        updateTabsButtons();
+    }
 
-	public String create(Producto producto) {
-		try {
-			return productoDAO.insert(producto);
-		} catch (Exception e) {
-			return "❌ Error al crear el producto: " + e.getMessage();
-		}
-	}
+    @FXML
+    private Button updateBttn;
 
-		@FXML
-		private Button CloneProducto;
+    @FXML
+    private TextField stockTxt;
 
-		@FXML
-		private TextField idProducto;
+    @FXML
+    private Button editBttn;
 
-		@FXML
-		private Button getProductoById;
+    @FXML
+    private TextField nameTxt;
 
-		private Producto producto;
-		@FXML
-		void getProductoById(ActionEvent event) {
-			try {
-				producto = productoDAO.getById(Integer.parseInt(idProducto.getText()));
-				Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-				a.setTitle("Consulta de producto");
-				a.setContentText(producto.toString());
-				a.show();
-			} catch (Exception err) {
-				System.err.println("Error al consultar producto");
-				Alert a = new Alert(Alert.AlertType.ERROR);
-				a.setTitle("Error al consultar producto");
-				a.setContentText(err.getMessage());
-				a.show();
-			}
-		}
+    @FXML
+    private Button showHistoryBttn;
 
-		@FXML
-		void CloneProducto(ActionEvent event) {
-			try {
-				producto = productoDAO.getById(Integer.parseInt(idProducto.getText()));
-				Producto productoClonado = producto.clonar();
-				productoDAO.insert(productoClonado);
-				Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-				a.setTitle("Clonación de producto");
-				a.setContentText(productoClonado.toString());
-				a.show();
-			} catch (Exception err) {
-				Alert a = new Alert(Alert.AlertType.ERROR);
-				a.setTitle("Error clonando el producto");
-				a.setContentText(err.getMessage());
-				a.show();
-			}
-		}
+    @FXML
+    private DatePicker datePicker;
+
+    @FXML
+    private TextField priceTxt;
+
+    @FXML
+    private TextArea descriptionTxt;
+
+    @FXML
+    void onEdit(ActionEvent event) {
+        updateTabsButtons();
+        nameTxt.requestFocus();
+    }
+
+    @FXML
+    void OnShowHistory(ActionEvent event) {
+        if (productosHistory.size() == 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("No hay historial de productos");
+            alert.show();
+            return;
+        }
+        isEditing = false;
+        updateTabsButtons();
+    }
+
+    @FXML
+    void onUpdate(ActionEvent event) {
+        productosHistory.add(producto.createSnapshot());
+    }
+
+    void updateTabsButtons() {
+        if (isEditing) {
+            editBttn.setDisable(true);
+            showHistoryBttn.setDisable(false);
+            updateBttn.setVisible(false);
+            nameTxt.setEditable(true);
+            descriptionTxt.setEditable(true);
+            priceTxt.setEditable(true);
+            stockTxt.setEditable(true);
+        } else {
+            showHistoryBttn.setDisable(true);
+            editBttn.setDisable(false);
+            updateBttn.setVisible(true);
+            nameTxt.setEditable(false);
+            descriptionTxt.setEditable(false);
+            priceTxt.setEditable(false);
+            stockTxt.setEditable(false);
+        }
+    }
 
 }
