@@ -17,7 +17,7 @@
       <TextArea fx:id="descriptionTxt" layoutX="34.0" layoutY="288.0" prefHeight="73.0" prefWidth="187.0" />
       <TextField fx:id="stockTxt" layoutX="251.0" layoutY="129.0" prefHeight="39.0" prefWidth="187.0" />
       <Text layoutX="251.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock" />
-      <DatePicker fx:id="datePicker" layoutX="251.0" layoutY="206.0" />
+      <DatePicker fx:id="datePicker" layoutX="251.0" layoutY="206.0" onAction="#onDateChanged" />
       <Text layoutX="251.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha" />
       <Button fx:id="updateBttn" layoutX="331.0" layoutY="265.0" mnemonicParsing="false" onAction="#onUpdate" text="Actualizar" />
       <Text layoutX="37.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modo">

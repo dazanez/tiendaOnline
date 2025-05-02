@@ -9,16 +9,28 @@ public class Producto {
 	private int stock;
 	private LocalDate createdAt;
 
-	public Producto(String name, String description, double price, int stock) {
+	public Producto(String name, String description, double price, int stock, LocalDate createdAt) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.stock = stock;
-		this.createdAt = LocalDate.now();
+		this.createdAt = createdAt;
+	}
+
+	public Producto(String name, String description, double price, int stock) {
+		this(name, description, price, stock, LocalDate.now());
 	}
 
 	public ProductoMemento createSnapshot() {
-		return new ProductoMemento(this, name, description, price, stock, createdAt);
+		return new ProductoMemento(name, description, price, stock, createdAt);
+	}
+
+	public void restoreFrom(ProductoMemento memento) {
+		this.name = memento.getName();
+		this.description = memento.getDescription();
+		this.price = memento.getPrice();
+		this.stock = memento.getStock();
+		this.createdAt = memento.getCreated_at();
 	}
 
 	public String getName() {
@@ -60,4 +72,17 @@ public class Producto {
 	public void setCreatedAt(LocalDate createdAt) {
 		this.createdAt = createdAt;
 	}
+
+	@Override
+	public String toString() {
+		return "Producto{" +
+				"name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", price=" + price +
+				", stock=" + stock +
+				", createdAt=" + createdAt +
+				'}';
+	}
+
+
 }
