@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="co.edu.poli.tiendadj.controlador.ObserverController"
+            prefWidth="600" prefHeight="400">
+
+    <VBox spacing="10" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+        <Label text="Suscripción a Notificaciones de Producto" style="-fx-font-size: 18px; -fx-font-weight: bold"/>
+
+        <HBox spacing="10">
+            <Label text="Nombre de usuario:"/>
+            <TextField fx:id="txtNombreUsuario" promptText="Ingresa tu nombre" prefWidth="200"/>
+            <Button fx:id="btnSuscribirse" text="Suscribirse" onAction="#suscribirse"/>
+            <Button fx:id="btnDesuscribirse" text="Desuscribirse" onAction="#desuscribirse"/>
+        </HBox>
+
+        <HBox spacing="10">
+            <Label text="Nuevo precio:"/>
+            <TextField fx:id="txtNuevoPrecio" promptText="Ej: 89.99" prefWidth="100"/>
+            <Button fx:id="btnActualizarPrecio" text="Actualizar Precio" onAction="#actualizarPrecio"/>
+        </HBox>
+
+        <HBox spacing="20">
+            <VBox spacing="5" prefWidth="200">
+                <Label text="Usuarios suscritos:"/>
+                <ListView fx:id="listaSuscritos" prefHeight="200"/>
+            </VBox>
+
+            <VBox spacing="5" VBox.vgrow="ALWAYS">
+                <Label text="Notificaciones:"/>
+                <TextArea fx:id="areaNotificaciones" wrapText="true" prefHeight="200"/>
+            </VBox>
+        </HBox>
+    </VBox>
+</AnchorPane>

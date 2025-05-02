@@ -17,6 +17,6 @@ public class MenuControlador extends ControladorBase {
 
     @FXML
     void openObserverScreen(ActionEvent event) throws IOException {
-//        MainView.loadScreenWithPath("observer.fxml", "Observer");
+       MainView.loadScreenWithPath("observer.fxml", "Observer");
     }
 }
